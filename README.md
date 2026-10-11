@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Supercode Homepage
 
-## Getting Started
+Live website: [https://supercode-test-taupe.vercel.app/](https://supercode-test-taupe.vercel.app/)
 
-First, run the development server:
+## Project structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This is a Next.js application organized with the App Router. The source code is separated by responsibility so the layout, homepage sections, animations, assets, and data remain maintainable.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## `src/`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+This directory contains the main application source code.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### `src/app/`
 
-## Learn More
+Contains application routes and global application setup.
 
-To learn more about Next.js, take a look at the following resources:
+- `layout.tsx` contains the root layout shared by all pages. It renders the header, page content, footer, and motion provider.
+- `page.tsx` is the homepage entry point. It combines the logo journey animation, hero section, and intro section.
+- `globals.css` contains site-wide styles, theme variables, browser resets, and reusable classes such as `.container`.
+- `favicon.ico` is the browser tab icon.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### `src/app/projects/`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contains the project archive pages.
 
-## Deploy on Vercel
+- `page.tsx` displays the projects listing.
+- `layout.tsx` provides shared layout for project pages.
+- `[id]/page.tsx` displays an individual project using its dynamic ID.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `src/components/`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contains reusable and feature-specific React components.
+
+#### `src/components/layout/`
+
+Global layout components used across the application.
+
+- `Header.tsx` contains the navbar, logo, navigation links, contact button, and mobile menu.
+- `header.css` contains header-specific styles.
+- `Footer.tsx` contains the footer logo, links, divider, and copyright area.
+- `footer.css` contains footer-specific styles.
+- `MotionProvider.tsx` initializes Lenis smooth scrolling and GSAP-based animations.
+
+#### `src/components/home/`
+
+Homepage-specific sections and animation logic.
+
+- `HeroSection.tsx` contains the main hero heading, supporting copy, and logo placeholder.
+- `hero-section.css` contains hero layout, typography, responsive rules, and entrance-state styles.
+- `IntroSection.tsx` contains the intro heading, description, CTA, banner, and logo placeholder.
+- `intro-section.css` contains intro layout, colors, spacing, typography, and responsive behavior.
+- `CompanyLogoJourney.tsx` loads the Three.js model and controls its GSAP and ScrollTrigger movement between the hero and intro sections. It also supports click-and-drag rotation.
+- `company-logo-journey.css` contains styles for the floating 3D model container and canvas.
+
+#### `src/components/ui/`
+
+Generic UI components used by the project archive.
+
+- `Card.tsx` is a reusable bordered card component.
+- `Button.tsx` is a reusable link-style button component.
+
+### `src/lib/`
+
+Contains application data and helper logic.
+
+- `projects.ts` contains project archive data and the project lookup helper.
+
+### `src/types/`
+
+Contains shared TypeScript types.
+
+- `project.ts` defines the structure of a project object.
+
+## `public/`
+
+Contains static files served directly by the browser.
+
+- `public/images/` contains logos, arrows, banner images, and navbar/footer assets.
+- `public/models/` contains the `supercode-model.glb` 3D model.
+- `public/draco/` contains the Draco decoder files required to load the compressed GLB model in the browser.
+- `public/fonts/` contains font files and font licensing information.
+- The starter SVG files are leftover template assets and are not part of the Supercode homepage.
+
+## `design/`
+
+Contains design and reference material.
+
+- Figma design files.
+- The original 3D model source file.
+- Font packages and related licensing files.
+
+This folder is used as a design and source reference and is not directly served to visitors.
