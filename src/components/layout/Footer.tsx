@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container footer-container">
         <div className="footer-brand" aria-label="Supercode">
           <Image
-            className="footer-logo loading-eager"
+            className="footer-logo"
             src="/images/footer-logo.png"
             alt="Supercode"
             width={1415}

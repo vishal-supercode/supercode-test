@@ -24,10 +24,20 @@ export function CompanyLogoJourney() {
     if (!heroLogo || !introLogo || !flyingLogo || !heroSection || !introSection)
       return;
 
-    let heroStart = heroLogo.getBoundingClientRect();
+    let heroStart = { left: 0, top: 0, width: 0, height: 0 };
+    const measureHeroStart = () => {
+      const rect = heroLogo.getBoundingClientRect();
+      const sectionRect = heroSection.getBoundingClientRect();
+      heroStart = {
+        left: rect.left - sectionRect.left,
+        top: rect.top - sectionRect.top,
+        width: rect.width,
+        height: rect.height,
+      };
+    };
     const placeAtHero = () => {
       const rect = heroLogo.getBoundingClientRect();
-      heroStart = rect;
+      measureHeroStart();
       gsap.set(flyingLogo, {
         position: "fixed",
         left: rect.left,
@@ -43,6 +53,20 @@ export function CompanyLogoJourney() {
 
     const handOffToIntro = () => {
       const rect = introLogo.getBoundingClientRect();
+      gsap.set(flyingLogo, {
+        position: "absolute",
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+        width: rect.width,
+        height: rect.height,
+        x: 0,
+        y: 0,
+        scale: 1,
+      });
+    };
+
+    const handOffToHero = () => {
+      const rect = heroLogo.getBoundingClientRect();
       gsap.set(flyingLogo, {
         position: "absolute",
         left: rect.left + window.scrollX,
@@ -189,24 +213,14 @@ export function CompanyLogoJourney() {
         end: "top 30%",
         scrub: 1.25,
         invalidateOnRefresh: true,
-        onRefreshInit: placeAtHero,
+        onRefreshInit: measureHeroStart,
         onLeave: handOffToIntro,
-        onEnterBack: () => {
-          // Convert the handed-off document position back to its current viewport position
-          // before switching to fixed positioning, avoiding a visible coordinate jump.
-          const rect = flyingLogo.getBoundingClientRect();
-          gsap.set(flyingLogo, {
-            position: "fixed",
-            left: rect.left,
-            top: rect.top,
-            width: rect.width,
-            height: rect.height,
-          });
-        },
+        onLeaveBack: handOffToHero,
         onUpdate: (self) => {
           const to = introLogo.getBoundingClientRect();
           const progress = self.progress;
           gsap.set(flyingLogo, {
+            position: "fixed",
             left: gsap.utils.interpolate(heroStart.left, to.left, progress),
             top: gsap.utils.interpolate(heroStart.top, to.top, progress),
             width: gsap.utils.interpolate(heroStart.width, to.width, progress),
@@ -220,9 +234,9 @@ export function CompanyLogoJourney() {
       });
     });
 
-    window.addEventListener("resize", placeAtHero);
+    window.addEventListener("resize", measureHeroStart);
     return () => {
-      window.removeEventListener("resize", placeAtHero);
+      window.removeEventListener("resize", measureHeroStart);
       disposed = true;
       flyingLogo.removeEventListener("pointerdown", onPointerDown);
       flyingLogo.removeEventListener("pointermove", onPointerMove);

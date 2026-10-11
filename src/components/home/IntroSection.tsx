@@ -65,12 +65,10 @@ export function IntroSection() {
         </div>
         <div className="intro-side">
           <p className="intro-description">
-            DEVELOPMENT orem ipsum dolor sit amet consectetur. Augue at nisl
-            phasellus nisl
-            <br />
+            <span className="intro-description-lead">DEVELOPMENT</span> orem
+            ipsum dolor sit amet consectetur. Augue at nisl phasellus nisl
             ullamcorper at felis. Ut suscipit sit morbi semper lacus lorem urna
             eu. Semper et
-            <br />
             eleifend sit gravida euismod turpis. Pellentesque
           </p>
           <a className="intro-link" href="#work">

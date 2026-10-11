@@ -41,14 +41,21 @@ export function Header() {
             ))}
             <a
               className="mobile-contact"
-              href="mailto:hello@supercode.com"
+              href="mailto:hello@supercode.in"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMenuOpen(false)}
             >
               <Image src="/images/arrow.png" alt="" width={51} height={18} />
               <span>Contact us</span>
             </a>
           </nav>
-          <a className="header-cta" href="mailto:hello@supercode.com">
+          <a
+            className="header-cta"
+            href="mailto:hello@supercode.in"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Image
               className="header-cta-arrow"
               src="/images/arrow.png"

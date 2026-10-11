@@ -59,7 +59,7 @@ export function MotionProvider() {
         stagger: 0.08,
         ease: "power2.out",
       });
-      gsap.from(".footer-top > *, .footer-brand, .footer-bottom > *", {
+      gsap.from(".footer-brand, .footer-bottom > *", {
         y: 18,
         opacity: 0,
         duration: 0.7,
