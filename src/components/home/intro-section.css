@@ -1,0 +1,105 @@
+.intro-section {
+  --intro-art-size: clamp(15rem, 24vw, 23rem);
+  height: auto;
+  min-height: 100dvh;
+  background: #fff;
+  color: #050505;
+  overflow: hidden;
+}
+.intro-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 38rem);
+  width: 100%;
+  max-width: 94.5rem;
+  height: 100%;
+  min-height: 0;
+  margin-inline: auto;
+  gap: clamp(2rem, 3vw, 3rem);
+  padding: 3.25rem 2.5rem 3.5rem;
+  padding-block: 90px;
+}
+.intro-content {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.intro-content h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 4rem);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+.intro-logo {
+  align-self: flex-start !important;
+  width: var(--intro-art-size);
+  height: auto;
+  margin-top: auto;
+  margin-left: 0;
+  margin-right: auto;
+  visibility: hidden;
+}
+.intro-side {
+  display: flex;
+  height: auto;
+  min-height: 0;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.intro-description {
+  max-width: 42rem;
+  margin: 0.35rem 0 3rem;
+  color: #050505;
+  font-family: "PP Right Grotesk", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 120%;
+  letter-spacing: 0;
+}
+.intro-link {
+  display: inline-flex;
+  width: clamp(8.5rem, 12.1vw, 11.5rem);
+  margin-bottom: 0;
+}
+.intro-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.intro-media {
+  width: 100%;
+  margin-top: clamp(6rem, 10vh, 9rem);
+  overflow: hidden;
+}
+.intro-media img {
+  display: block;
+  width: 100%;
+  height: calc(var(--intro-art-size) * 0.924);
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .intro-section {
+    --intro-art-size: min(58vw, 27rem);
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+  .intro-container {
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 1fr);
+    height: 100%;
+    min-height: 0;
+    gap: 2rem;
+    padding: 2.5rem 1.25rem 2.75rem;
+  }
+  .intro-content,
+  .intro-side {
+    min-height: 0;
+  }
+  .intro-content h2 {
+    font-size: clamp(1.75rem, 4.5vw, 3rem);
+  }
+}
